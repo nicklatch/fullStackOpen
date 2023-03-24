@@ -22,4 +22,6 @@ const App = () => {
   );
 };
 
-export default App; //components embeded within the root do not need to be exported
+export default App;
+
+//left off at a-Some notes
