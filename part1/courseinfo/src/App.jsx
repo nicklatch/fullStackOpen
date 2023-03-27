@@ -21,6 +21,7 @@ const Header = (props) => {
 };
 
 const Content = (props) => {
+  //needs refactor to add as many parts as there are parts indxes
   return (
     <div>
       <Part part={props.parts[0]} />
