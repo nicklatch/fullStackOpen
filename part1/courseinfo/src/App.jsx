@@ -1,11 +1,11 @@
 const App = () => {
   const course = "Half Stack application development";
   const parts = [
-    { part: "Fundamentals of React", exercises: 10 },
-    { part: "Using props to pass data", exercises: 7 },
-    { part: "State of a component", exercises: 14 },
+    { title: "Fundamentals of React", exercises: 10 },
+    { title: "Using props to pass data", exercises: 7 },
+    { title: "State of a component", exercises: 14 },
   ];
-  const total = parts[0].exercises + parts[1].exercises + parts[2].exercises; // need to make this usable with abitrary amount of parts objects
+  const total = parts.reduce((curr, { exercises }) => curr + exercises, 0);
 
   return (
     <div>
@@ -35,7 +35,7 @@ const Part = (props) => {
   return (
     <>
       <p>
-        {props.part.part} {props.part.exercises}
+        {props.part.title} {props.part.exercises}
       </p>
     </>
   );
