@@ -5,14 +5,13 @@ const App = () => {
     { title: "Using props to pass data", exercises: 7 },
     { title: "State of a component", exercises: 14 },
   ];
-  const total = parts.reduce((curr, { exercises }) => curr + exercises, 0);
 
   return (
-    <div>
+    <>
       <Header course={course} />
       <Content parts={parts} />
-      <Total total={total} />
-    </div>
+      <Total parts={parts} />
+    </>
   );
 };
 
@@ -21,13 +20,12 @@ const Header = (props) => {
 };
 
 const Content = (props) => {
-  //needs refactor to add as many parts as there are parts indxes
   return (
-    <div>
+    <>
       <Part part={props.parts[0]} />
       <Part part={props.parts[1]} />
       <Part part={props.parts[2]} />
-    </div>
+    </>
   );
 };
 
@@ -45,7 +43,10 @@ const Part = (props) => {
 const Total = (props) => {
   return (
     <>
-      <p>Number of exercises {props.total}</p>
+      <p>
+        Number of exercises{" "}
+        {props.parts.reduce((curr, { exercises }) => curr + exercises, 0)}
+      </p>
     </>
   );
 };
