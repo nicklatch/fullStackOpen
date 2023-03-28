@@ -44,10 +44,10 @@ const Part = (part) => {
   );
 };
 
-const Total = (props) => {
+const Total = (total) => {
   return (
     <>
-      <p>Number of exercises {props.parts.reduce((curr, { exercises }) => curr + exercises, 0)}</p>
+      <p>Number of exercises {total.parts.reduce((curr, { exercises }) => curr + exercises, 0)}</p>
     </>
   );
 };
