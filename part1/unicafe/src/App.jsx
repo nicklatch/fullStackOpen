@@ -19,12 +19,16 @@ const Statistics = ({ currentStates }) => {
   return total !== 0 ? (
     <div>
       <h2>statistics</h2>
-      <StatisticLine text="good" value={currentStates.good} />
-      <StatisticLine text="neutral" value={currentStates.neutral} />
-      <StatisticLine text="bad" value={currentStates.bad} />
-      <StatisticLine text="all" value={total} />
-      <StatisticLine text="average" value={average} />
-      <StatisticLine text="positive" value={positive} />
+      <table>
+        <tbody>
+          <TableDataRow text="good" value={currentStates.good} />
+          <TableDataRow text="neutral" value={currentStates.neutral} />
+          <TableDataRow text="bad" value={currentStates.bad} />
+          <TableDataRow text="all" value={total} />
+          <TableDataRow text="average" value={average} />
+          <TableDataRow text="positive" value={positive} />
+        </tbody>
+      </table>
     </div>
   ) : (
     <div>
@@ -34,13 +38,15 @@ const Statistics = ({ currentStates }) => {
   );
 };
 
+const TableDataRow = ({ text, value }) => (
+  <tr>
+    <td>{text}</td>
+    <td>{value}</td>
+  </tr>
+);
+
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
-);
-const StatisticLine = ({ text, value }) => (
-  <div>
-    {text} {value}
-  </div>
 );
 
 //root
