@@ -16,15 +16,15 @@ const NextAnecdote = ({ anecdotes, currState, stateSetter }) => {
 };
 
 const Vote = ({ currState }) => {
-  const points = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 };
-  const copyPoints = { ...points };
+  const originalPoints = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 }; //find way to make this pragmaticly generated
+  const copyPoints = { ...originalPoints };
 
-  const currentLeader = (obj) => {
-    const values = Object.values(obj);
-    console.log(values);
-    const sortedValues = values.sort();
-    return sortedValues[sortedValues.length - 1];
-  }
+  const currentLeader = (copyPoints) => {
+    const localPoints = Object.values(copyPoints);
+    console.log(localPoints);
+    const sortedLocalPoints = localPoints.sort();
+    return sortedLocalPoints[sortedLocalPoints.length - 1];
+  };
   function handleVote({ currState }) {
     copyPoints[currState] += 1;
   }
