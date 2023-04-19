@@ -1,12 +1,18 @@
 import { useState } from "react";
 
-//helper to set initial points state
+/* helper to create initial points state object, creates array the length of
+arr.length, then uses reduce to create object with arr[*] as the keys set to value of 0 */
 const originalPoints = (arr) => {
   return Array.from({ length: arr.length }, (_, i) => i).reduce(
     (acc, curr) => ((acc[curr] = 0), acc),
     {}
   );
-}; /* creates an array the range of anecdotes length, turns that into an object with each element becoming a key set to a value of 0 */
+};
+
+const Heading = ({ headingLevel, text }) => {
+  const LevelOfHeading = headingLevel;
+  return <LevelOfHeading>{text}</LevelOfHeading>;
+};
 
 const VoteCount = ({ currStatesPoints }) => {
   return (
@@ -23,13 +29,13 @@ const Button = ({ handleClick, text }) => (
 const NextAnecdote = ({ anecdotesLength, currState, stateSetter }) => {
   const randomIndex = () => Math.floor(Math.random() * anecdotesLength);
 
-  const nextAnecdote = () => {
+  const getNextAnecdote = () => {
     let last;
-    last = last != currState ? currState : nextAnecdote();
+    last = last != currState ? currState : getNextAnecdote();
     return stateSetter(randomIndex);
   };
 
-  return <Button handleClick={nextAnecdote} text="next anecdote" />;
+  return <Button handleClick={getNextAnecdote} text="next anecdote" />;
 };
 
 const Vote = ({ currState, points, stateSetter }) => {
@@ -47,6 +53,16 @@ const Vote = ({ currState, points, stateSetter }) => {
   );
 };
 
+const MostVoted = ({ points, anecdotes }) => {
+  const votesArr = Object.values(points);
+  const highVote = Math.max(...votesArr);
+
+  const mostVotedAnecdote =
+    anecdotes[votesArr.findIndex((element) => element == highVote)];
+
+  return <div>{mostVotedAnecdote}</div>;
+};
+
 const App = () => {
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -61,18 +77,20 @@ const App = () => {
 
   const [selected, setSelected] = useState(0);
   const [points, setPoints] = useState(originalPoints(anecdotes));
-  console.log("toplevel", selected, points, points[selected]);
 
   return (
     <>
+      <Heading headingLevel="h2" text="Anecdote of the day" />
       <div>{anecdotes[selected]}</div>
       <VoteCount currStatesPoints={points[selected]} />
+      <Vote currState={selected} points={points} stateSetter={setPoints} />
       <NextAnecdote
         anecdotesLength={anecdotes.length}
         currState={selected}
         stateSetter={setSelected}
       />
-      <Vote currState={selected} points={points} stateSetter={setPoints} />
+      <Heading headingLevel="h2" text="Anecdote with most votes" />
+      <MostVoted points={points} anecdotes={anecdotes} />
     </>
   );
 };
