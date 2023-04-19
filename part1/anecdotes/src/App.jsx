@@ -1,38 +1,48 @@
 import { useState } from "react";
 
+//helper to set initial points state
+const originalPoints = (arr) => {
+  return Array.from({ length: arr.length }, (_, i) => i).reduce(
+    (acc, curr) => ((acc[curr] = 0), acc),
+    {}
+  );
+}; /* creates an array the range of anecdotes length, turns that into an object with each element becoming a key set to a value of 0 */
+
+const VoteCount = ({ currStatesPoints }) => {
+  return (
+    <>
+      <div>has {currStatesPoints} votes</div>
+    </>
+  );
+};
+
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>{text}</button>
 );
 
-const NextAnecdote = ({ anecdotes, currState, stateSetter }) => {
-  const randomIndex = () => Math.floor(Math.random() * anecdotes.length);
+const NextAnecdote = ({ anecdotesLength, currState, stateSetter }) => {
+  const randomIndex = () => Math.floor(Math.random() * anecdotesLength);
+
   const nextAnecdote = () => {
     let last;
     last = last != currState ? currState : nextAnecdote();
-    return stateSetter(randomIndex());
+    return stateSetter(randomIndex);
   };
 
   return <Button handleClick={nextAnecdote} text="next anecdote" />;
 };
 
-const Vote = ({ currState }) => {
-  const originalPoints = { 0: 0, 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0 }; //find way to make this pragmaticly generated
-  const copyPoints = { ...originalPoints };
-
-  const currentLeader = (copyPoints) => {
-    const localPoints = Object.values(copyPoints);
-    console.log(localPoints);
-    const sortedLocalPoints = localPoints.sort();
-    return sortedLocalPoints[sortedLocalPoints.length - 1];
+const Vote = ({ currState, points, stateSetter }) => {
+  const handleVote = () => {
+    return stateSetter(() => ({
+      ...points,
+      [currState]: (points[currState] += 1),
+    }));
   };
-  function handleVote({ currState }) {
-    copyPoints[currState] += 1;
-  }
-  //return button
+
   return (
     <>
       <Button handleClick={handleVote} text="vote" />
-      <div>{currentLeader(copyPoints)}</div>
     </>
   );
 };
@@ -50,16 +60,19 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [points, setPoints] = useState(originalPoints(anecdotes));
+  console.log("toplevel", selected, points, points[selected]);
 
   return (
     <>
       <div>{anecdotes[selected]}</div>
+      <VoteCount currStatesPoints={points[selected]} />
       <NextAnecdote
-        anecdotes={anecdotes}
+        anecdotesLength={anecdotes.length}
         currState={selected}
         stateSetter={setSelected}
       />
-      <Vote currState={selected} />
+      <Vote currState={selected} points={points} stateSetter={setPoints} />
     </>
   );
 };
