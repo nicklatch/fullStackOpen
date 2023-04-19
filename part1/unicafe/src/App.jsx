@@ -57,7 +57,6 @@ const App = () => {
   const [bad, setBad] = useState(0);
 
   const currentStates = { good, neutral, bad };
-
   const handlers = {
     handleGood: () => setGood(good + 1),
     handleNeutral: () => setNeutral(neutral + 1),
