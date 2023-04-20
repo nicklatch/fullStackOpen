@@ -81,18 +81,18 @@ const App = () => {
   return (
     <>
       <Heading headingLevel="h2" text="Anecdote of the day" />
-      <div>{anecdotes[selected]}</div>
-      <VoteCount currStatesPoints={points[selected]} />
-      <Vote currState={selected} points={points} stateSetter={setPoints} />
-      <NextAnecdote
+        <div>{anecdotes[selected]}</div>
+        <VoteCount currStatesPoints={points[selected]} />
+        <Vote currState={selected} points={points} stateSetter={setPoints} />
+        <NextAnecdote
         anecdotesLength={anecdotes.length}
         currState={selected}
-        stateSetter={setSelected}
-      />
+        stateSetter={setSelected} />
       <Heading headingLevel="h2" text="Anecdote with most votes" />
-      <MostVoted points={points} anecdotes={anecdotes} />
+        <MostVoted points={points} anecdotes={anecdotes} />
     </>
   );
 };
+
 
 export default App;
