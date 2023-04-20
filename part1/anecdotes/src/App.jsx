@@ -1,67 +1,10 @@
 import { useState } from "react";
-
-/* helper to create initial points state object, creates array the length of
-arr.length, then uses reduce to create object with arr[*] as the keys set to value of 0 */
-const originalPoints = (arr) => {
-  return Array.from({ length: arr.length }, (_, i) => i).reduce(
-    (acc, curr) => ((acc[curr] = 0), acc),
-    {}
-  );
-};
-
-const Heading = ({ headingLevel, text }) => {
-  const LevelOfHeading = headingLevel;
-  return <LevelOfHeading>{text}</LevelOfHeading>;
-};
-
-const VoteCount = ({ currStatesPoints }) => {
-  return (
-    <>
-      <div>has {currStatesPoints} votes</div>
-    </>
-  );
-};
-
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>{text}</button>
-);
-
-const NextAnecdote = ({ anecdotesLength, currState, stateSetter }) => {
-  const randomIndex = () => Math.floor(Math.random() * anecdotesLength);
-
-  const getNextAnecdote = () => {
-    let last;
-    last = last != currState ? currState : getNextAnecdote();
-    return stateSetter(randomIndex);
-  };
-
-  return <Button handleClick={getNextAnecdote} text="next anecdote" />;
-};
-
-const Vote = ({ currState, points, stateSetter }) => {
-  const handleVote = () => {
-    return stateSetter(() => ({
-      ...points,
-      [currState]: (points[currState] += 1),
-    }));
-  };
-
-  return (
-    <>
-      <Button handleClick={handleVote} text="vote" />
-    </>
-  );
-};
-
-const MostVoted = ({ points, anecdotes }) => {
-  const votesArr = Object.values(points);
-  const highVote = Math.max(...votesArr);
-
-  const mostVotedAnecdote =
-    anecdotes[votesArr.findIndex((element) => element == highVote)];
-
-  return <div>{mostVotedAnecdote}</div>;
-};
+import Heading from "./components/Heading";
+import VoteCount from "./components/VoteCount";
+import NextAnecdote from "./components/NextAnecdote";
+import Vote from "./components/Vote";
+import MostVoted from "./components/MostVoted";
+import { originalPoints } from "./helpers/orginalPoints";
 
 const App = () => {
   const anecdotes = [
@@ -81,18 +24,18 @@ const App = () => {
   return (
     <>
       <Heading headingLevel="h2" text="Anecdote of the day" />
-        <div>{anecdotes[selected]}</div>
-        <VoteCount currStatesPoints={points[selected]} />
-        <Vote currState={selected} points={points} stateSetter={setPoints} />
-        <NextAnecdote
+      <div>{anecdotes[selected]}</div>
+      <VoteCount currStatesPoints={points[selected]} />
+      <Vote currState={selected} points={points} stateSetter={setPoints} />
+      <NextAnecdote
         anecdotesLength={anecdotes.length}
         currState={selected}
-        stateSetter={setSelected} />
+        stateSetter={setSelected}
+      />
       <Heading headingLevel="h2" text="Anecdote with most votes" />
-        <MostVoted points={points} anecdotes={anecdotes} />
+      <MostVoted points={points} anecdotes={anecdotes} />
     </>
   );
 };
-
 
 export default App;
