@@ -1,4 +1,5 @@
 import Course from "./components/Course";
+import Heading from "./components/Heading";
 
 function App() {
   const courses = [
@@ -47,6 +48,7 @@ function App() {
   ];
   return (
     <>
+      <Heading text="Web devlepment curriculum" headingLevel="h1" />
       {courses.map((course) => (
         <Course key={course.id} course={course} />
       ))}
