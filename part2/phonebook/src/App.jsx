@@ -6,6 +6,10 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
+    if (persons.find((person) => person["name"] === newName)) {
+      alert(`${newName} is already added to the phonebook`);
+      return;
+    }
     const nameObject = {
       name: newName,
     };
@@ -15,7 +19,7 @@ const App = () => {
   };
 
   const handlePersonChange = (event) => {
-    console.log(event.target.value);
+    console.log("new name", event.target.value);
     setNewName(event.target.value);
   };
 
