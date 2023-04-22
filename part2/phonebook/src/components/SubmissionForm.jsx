@@ -38,31 +38,7 @@ const SubmissionForm = ({
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value);
   };
-  /*     if (
-      persons.find(
-        (person) => person["name"].toLowerCase() === newName.toLowerCase()
-      )
-    ) {
-      alert(`${newName} is already added to the phonebook`);
-      return;
-    }*/
 
-  /*
-    setPersons(persons.concat(nameObject));
-    setNewName("");
-    setNewNumber("");
-  };
-
-  const handlePersonChange = (event) => {
-    console.log("new name", event.target.value);
-    setNewName(event.target.value);
-  };
-
-  const handleNumberChange = (event) => {
-    console.log("new name", event.target.value);
-    setNewNumber(event.target.value);
-  };
- */
   return (
     <form onSubmit={addPerson}>
       <div>

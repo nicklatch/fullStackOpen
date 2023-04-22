@@ -1,7 +1,7 @@
 import { useState } from "react";
 import SubmissionForm from "./components/SubmissionForm";
 import Persons from "./components/Persons";
-//import { FilterSearch } from "./components/FilterSearch";
+import { FilterSearch } from "./components/FilterSearch";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -12,14 +12,13 @@ const App = () => {
   ]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
-  //const [search, setSearch] = useState([]);
+  const [search, setSearch] = useState("");
 
   return (
     <div>
       <h2>Phonebook</h2>
-      {/*       <FilterSearch search={search} setSearch={setSearch} persons={persons} />
-       */}{" "}
-      <h2>Add a new</h2>
+      <FilterSearch search={search} setSearch={setSearch} persons={persons} />
+      <h3>Add a new</h3>
       <SubmissionForm
         persons={persons}
         setPersons={setPersons}
@@ -28,8 +27,8 @@ const App = () => {
         newNumber={newNumber}
         setNewNumber={setNewNumber}
       />
-      <h2>Numbers</h2>
-      <Persons persons={persons} />
+      <h3>Numbers</h3>
+      <Persons persons={persons} search={search} />
     </div>
   );
 };
