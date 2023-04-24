@@ -1,34 +1,48 @@
-import {
-  personFinder,
-  addAndClearInput,
-} from "../helpers/SubmissionFormHelper";
+import personService from "../services/persons";
 
 const SubmissionForm = ({
-  persons,
-  setPersons,
   newName,
   setNewName,
   newNumber,
   setNewNumber,
+  persons,
+  setPersons,
 }) => {
   const addPerson = (event) => {
     event.preventDefault();
 
+    const duplicatePerson = persons.find((person) => person.name === newName);
+
     const nameObject = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1,
     };
 
-    personFinder(persons, newName)
-      ? alert(`${newName} is already added to the phonebook`)
-      : addAndClearInput(
-          nameObject,
-          persons,
-          setPersons,
-          setNewName,
-          setNewNumber
-        );
+    if (duplicatePerson) {
+      if (duplicatePerson.number === newNumber) {
+        return alert(`${newName} is already present in the phonebook.`);
+      } else if (
+        confirm(
+          `${newName} is already present in the phonebook, would you like to replace it?`
+        )
+      ) {
+        personService
+          .update(duplicatePerson.id, { ...duplicatePerson, number: newNumber })
+          .then((updatedPerson) => {
+            setPersons(
+              persons.map((person) => person.id !== updatedPerson.id)
+                ? persons
+                : updatedPerson
+            );
+          });
+      }
+    } else {
+      personService.update(nameObject).then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        setNewName("");
+        setNewNumber("");
+      });
+    }
   };
 
   const handlePersonChange = (event) => {

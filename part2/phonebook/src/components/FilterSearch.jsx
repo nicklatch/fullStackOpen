@@ -1,4 +1,4 @@
-export const FilterSearch = ({ search, setSearch }) => {
+const FilterSearch = ({ search, setSearch }) => {
   const handleSearch = (event) => {
     setSearch(event.target.value);
   };
@@ -9,3 +9,5 @@ export const FilterSearch = ({ search, setSearch }) => {
     </div>
   );
 };
+
+export default FilterSearch;

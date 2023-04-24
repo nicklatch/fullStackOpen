@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import personService from "./services/persons";
 import SubmissionForm from "./components/SubmissionForm";
 import Persons from "./components/Persons";
-import { FilterSearch } from "./components/FilterSearch";
+import FilterSearch from "./components/FilterSearch";
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "040-123456", id: 1 },
-    { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
-    { name: "Dan Abramov", number: "12-43-234345", id: 3 },
-    { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
-  ]);
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
+  const [persons, setPersons] = useState([]);
+  const [newName, setNewName] = useState("name");
+  const [newNumber, setNewNumber] = useState("number");
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons);
+    });
+  }, []);
+
+  console.log(`rendered ${persons.length} records`);
 
   return (
     <div>
@@ -28,7 +32,7 @@ const App = () => {
         setNewNumber={setNewNumber}
       />
       <h3>Numbers</h3>
-      <Persons persons={persons} search={search} />
+      <Persons persons={persons} search={search} setPersons={setPersons} />
     </div>
   );
 };
