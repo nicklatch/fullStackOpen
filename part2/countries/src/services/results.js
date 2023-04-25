@@ -1,8 +1,7 @@
 import axios from "axios";
-const baseUrl = "http://restcountries.com/v3.1/all";
+const baseUrl = "https://restcountries.com/v3.1/all";
 
-export const getSearchResults = (search, setter) => {
-  return axios
-    .get(`${baseUrl}/${search}`)
-    .then((response) => setter(response.data));
+export const getInitialData = () => {
+  const request = axios.get(baseUrl);
+  return request.then((response) => response.data);
 };
