@@ -25,7 +25,7 @@ const SubmissionForm = ({
         return alert(`${newName} is already present in the phonebook.`);
       } else if (
         confirm(
-          `${newName} is already present in the phonebook, would you like to replace it?`
+          `${newName} is already added to the phonebook, would you like to replace the old number with a new one?`
         )
       ) {
         personService
