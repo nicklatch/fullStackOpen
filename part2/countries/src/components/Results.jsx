@@ -5,7 +5,7 @@ const Results = ({ search, countryData, results, setResults }) => {
     country.name.common.toLowerCase().includes(search.toLowerCase())
   );
 
-  //TODO: set res to setResults
+  //TODO: set res to setResults and implement rules from 2.18
 
   return (
     <>
