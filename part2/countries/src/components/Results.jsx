@@ -1,5 +1,7 @@
-const Results = ({ results, setResults }) => {
-  return (
+const Results = ({ search, results, setResults }) => {
+  
+  
+    return (
     <>
       <div>results</div>
     </>
