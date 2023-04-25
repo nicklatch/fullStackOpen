@@ -11,7 +11,9 @@ const SubmissionForm = ({
   const addPerson = (event) => {
     event.preventDefault();
 
-    const duplicatePerson = persons.find((person) => person.name === newName);
+    const duplicatePerson = persons.find(
+      (person) => person.name.toLowerCase() === newName.toLowerCase()
+    );
 
     const nameObject = {
       name: newName,
@@ -30,14 +32,14 @@ const SubmissionForm = ({
           .update(duplicatePerson.id, { ...duplicatePerson, number: newNumber })
           .then((updatedPerson) => {
             setPersons(
-              persons.map((person) => person.id !== updatedPerson.id)
-                ? persons
-                : updatedPerson
+              persons.map((person) =>
+                person.id !== updatedPerson.id ? person : updatedPerson
+              )
             );
           });
       }
     } else {
-      personService.update(nameObject).then((returnedPerson) => {
+      personService.create(nameObject).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson));
         setNewName("");
         setNewNumber("");
