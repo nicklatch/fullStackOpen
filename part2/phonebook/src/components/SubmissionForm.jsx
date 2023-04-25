@@ -7,6 +7,7 @@ const SubmissionForm = ({
   setNewNumber,
   persons,
   setPersons,
+  setMessage,
 }) => {
   const addPerson = (event) => {
     event.preventDefault();
@@ -36,14 +37,28 @@ const SubmissionForm = ({
                 person.id !== updatedPerson.id ? person : updatedPerson
               )
             );
+          })
+          .then(() => {
+            setMessage(`Updated ${duplicatePerson.name}`);
+            setTimeout(() => {
+              setMessage("");
+            }, 5000);
           });
       }
     } else {
-      personService.create(nameObject).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-        setNewName("");
-        setNewNumber("");
-      });
+      personService
+        .create(nameObject)
+        .then((returnedPerson) => {
+          setPersons(persons.concat(returnedPerson));
+          setNewName("");
+          setNewNumber("");
+        })
+        .then(() => {
+          setMessage(`Added ${nameObject.name}`);
+          setTimeout(() => {
+            setMessage("");
+          }, 5000);
+        });
     }
   };
 

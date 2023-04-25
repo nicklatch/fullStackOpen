@@ -1,6 +1,6 @@
 import peopleService from "../services/persons";
 
-const Persons = ({ persons, search, setPersons }) => {
+const Persons = ({ persons, search, setPersons, setError }) => {
   const results = persons.filter((person) => {
     return person.name.toLowerCase().includes(String(search).toLowerCase());
   });
@@ -9,15 +9,23 @@ const Persons = ({ persons, search, setPersons }) => {
     const name = event.target.value;
     const id = persons.find((person) => person.name === name).id;
 
-    confirm(`Delete ${name}?`)
-      ? peopleService
-          .personDelete(id)
-          .then(() =>
-            peopleService
-              .getAll()
-              .then((personsRemaing) => setPersons(personsRemaing))
-          )
-      : alert("no deletes made");
+    if (confirm(`Delete ${name}?`) && true)
+      peopleService
+        .personDelete(id)
+        .then(() =>
+          peopleService
+            .getAll()
+            .then((personsRemaing) => setPersons(personsRemaing))
+        )
+        .catch((error) => {
+          console.log(error);
+          setError(
+            `Information of ${name} has been already been removed from the server`
+          );
+          setTimeout(() => {
+            setError("");
+          }, 5000);
+        });
   };
 
   return (
