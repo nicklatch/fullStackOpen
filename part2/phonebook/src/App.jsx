@@ -16,8 +16,6 @@ const App = () => {
     });
   }, []);
 
-  console.log(`rendered ${persons.length} records`);
-
   return (
     <div>
       <h2>Phonebook</h2>
