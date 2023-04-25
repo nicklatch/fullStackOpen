@@ -6,8 +6,8 @@ import FilterSearch from "./components/FilterSearch";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("name");
-  const [newNumber, setNewNumber] = useState("number");
+  const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
   const [search, setSearch] = useState("");
 
   useEffect(() => {
