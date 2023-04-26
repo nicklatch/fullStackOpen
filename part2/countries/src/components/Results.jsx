@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from "react";
+import SingleMatch from "./SingleMatch";
+
+//TODO: split content conditional rendering into own component
 
 const Results = ({ search, countryData, results, setResults }) => {
   useEffect(() => {
@@ -12,7 +15,7 @@ const Results = ({ search, countryData, results, setResults }) => {
 
   if (results.length > 10 && search) {
     return <div>Please Narrow Your Search</div>;
-  } else if (results.length < 10 && results.length > 0) {
+  } else if (results.length < 10 && results.length > 1) {
     return (
       <div>
         {results.map((country) => (
@@ -20,6 +23,8 @@ const Results = ({ search, countryData, results, setResults }) => {
         ))}
       </div>
     );
+  } else if (results.length === 1) {
+    return <SingleMatch results={results} />;
   }
 };
 
