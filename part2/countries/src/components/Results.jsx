@@ -1,19 +1,26 @@
 /* eslint-disable react/prop-types */
+import { useEffect } from "react";
 
 const Results = ({ search, countryData, results, setResults }) => {
-  let res = countryData.filter((country) =>
-    country.name.common.toLowerCase().includes(search.toLowerCase())
-  );
+  useEffect(() => {
+    setResults(
+      countryData.filter((country) =>
+        country.name.common.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search]);
 
-  //TODO: set res to setResults and implement rules from 2.18
-
-  return (
-    <>
-      {res.map((country) => (
-        <div key={country}>{country.name.common}</div>
-      ))}
-    </>
-  );
+  if (results.length > 10 && search) {
+    return <div>Please Narrow Your Search</div>;
+  } else if (results.length < 10 && results.length > 0) {
+    return (
+      <div>
+        {results.map((country) => (
+          <div key={country.ccn3}>{country.name.common}</div>
+        ))}
+      </div>
+    );
+  }
 };
 
 export default Results;
