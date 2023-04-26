@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Search from "./components/Search";
-import Results from "./components/Results";
-import { getInitialData } from "./services/results";
+import Content from "./components/Content";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -9,14 +9,32 @@ function App() {
   const [countryData, setCountryData] = useState([]);
 
   useEffect(() => {
-    getInitialData().then((initResponse) => setCountryData(initResponse));
+    async function getInitialData() {
+      const request = await axios.get("https://restcountries.com/v3.1/all");
+      setCountryData(request.data);
+    }
+    getInitialData();
   }, []);
+
+  useEffect(() => {
+    setResults(
+      countryData.filter((country) =>
+        country.name.common.toLowerCase().includes(search.toLowerCase())
+      )
+    );
+  }, [search]);
 
   return (
     <>
-      <Search search={search} setSearch={setSearch} />
-      <Results
+      <Search
         search={search}
+        setSearch={setSearch}
+        countryData={countryData}
+        setResults={setResults}
+      />
+      <Content
+        search={search}
+        setSearch={setSearch}
         results={results}
         setResults={setResults}
         countryData={countryData}

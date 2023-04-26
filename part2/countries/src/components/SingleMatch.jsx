@@ -1,18 +1,19 @@
+/* eslint-disable react/prop-types */
 const SingleMatch = ({ results }) => {
   const country = results[0];
+
   return (
     <>
       <h1>{country.name.common}</h1>
-      <div>Capital: {country.capital[0]}</div>
+      <div>Capital(s): {country.capital.join(", ")}</div>
       <div>Area: {country.area}</div>
       <h4>Language(s):</h4>
       <ul>
-        <li>languages here</li> {/*TODO: add countries*/}
+        {Object.values(country.languages).map((lang) => (
+          <li key={lang}>{lang}</li>
+        ))}
       </ul>
-      <img
-        src={country.flags["png" ? "png" : "svg"]}
-        alt={`${country.name.common}'s flag`}
-      />
+      <img src={country.flags.png} alt={country.flags.alt} />
     </>
   );
 };
