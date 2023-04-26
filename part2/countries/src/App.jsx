@@ -9,12 +9,8 @@ function App() {
   const [countryData, setCountryData] = useState([]);
 
   useEffect(() => {
-    getInitialData().then((initResponse) =>
-      setCountryData(initResponse.map((country) => country))
-    );
+    getInitialData().then((initResponse) => setCountryData(initResponse));
   }, []);
-
-  console.log("blah", countryData);
 
   return (
     <>
