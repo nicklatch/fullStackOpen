@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import axios from "axios";
-import SearchBar from "./components/Search";
-import Content from "./components/Content";
+import SearchBar from "./components/SearchBar";
+import ResultsContent from "./components/ResultsContent";
 
 function App() {
   const [search, setSearch] = useState("");
@@ -17,17 +18,19 @@ function App() {
   }, []);
 
   useEffect(() => {
-    setResults(
-      countryData.filter((country) =>
-        country.name.common.toLowerCase().includes(search.toLowerCase())
-      )
-    );
+    if (search) {
+      setResults(
+        countryData.filter((country) =>
+          country.name.common.toLowerCase().includes(search.toLowerCase())
+        )
+      );
+    }
   }, [search]);
 
   return (
     <>
       <SearchBar search={search} setSearch={setSearch} />
-      <Content search={search} setSearch={setSearch} results={results} />
+      <ResultsContent search={search} setSearch={setSearch} results={results} />
     </>
   );
 }

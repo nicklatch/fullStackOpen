@@ -2,7 +2,7 @@
 import Results from "./Results";
 import SingleMatch from "./SingleMatch";
 
-const Content = ({ search, setSearch, results }) => {
+const ResultsContent = ({ search, setSearch, results }) => {
   const resLen = results.length;
 
   if (resLen > 10 && search) {
@@ -14,4 +14,4 @@ const Content = ({ search, setSearch, results }) => {
   }
 };
 
-export default Content;
+export default ResultsContent;
