@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const Search = ({ search, setSearch }) => {
+const SearchBar = ({ search, setSearch }) => {
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
   };
@@ -11,4 +11,4 @@ const Search = ({ search, setSearch }) => {
   );
 };
 
-export default Search;
+export default SearchBar;
