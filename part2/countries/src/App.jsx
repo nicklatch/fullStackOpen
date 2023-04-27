@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "./components/Search";
+import SearchBar from "./components/Search";
 import Content from "./components/Content";
 
 function App() {
@@ -26,19 +26,8 @@ function App() {
 
   return (
     <>
-      <Search
-        search={search}
-        setSearch={setSearch}
-        countryData={countryData}
-        setResults={setResults}
-      />
-      <Content
-        search={search}
-        setSearch={setSearch}
-        results={results}
-        setResults={setResults}
-        countryData={countryData}
-      />
+      <SearchBar search={search} setSearch={setSearch} />
+      <Content search={search} setSearch={setSearch} results={results} />
     </>
   );
 }
