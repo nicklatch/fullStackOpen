@@ -2,8 +2,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 
-const NO_STEALIN_MUH_KEYS = "547d8d3b3f15f968f33469249e2da86e";
-
 export default function Weather({ capitalInfo }) {
   const [weatherData, setWeatherData] = useState("");
 
