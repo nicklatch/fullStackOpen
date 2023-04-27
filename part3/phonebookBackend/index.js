@@ -2,6 +2,8 @@ const express = require("express");
 const { get } = require("http");
 const app = express();
 
+app.use(express.json());
+
 let persons = [
   {
     id: 1,
@@ -43,9 +45,43 @@ app.get("/info/", (request, response) => {
   );
 });
 
+app.delete("/api/persons/:id", (request, response) => {
+  const id = Number(request.params.id);
+  persons = persons.filter((person) => person.id !== id);
+  response.status(204).end();
+});
+
+const generatedId = () => {
+  const maxId = Math.floor(Math.random() * 1000);
+  return persons.find((person) => person.id !== maxId) ? maxId : generatedId();
+};
+
+app.post("/api/persons/", (request, response) => {
+  const body = request.body;
+  if (!body.name && !body.number) {
+    return response.status(400).json({
+      error: "Name and/or Number Missing",
+    });
+  } else if (persons.find((person) => person.name === body.name)) {
+    return response.status(400).json({
+      error: "Name Already Exists in Phonebook",
+    });
+  }
+  const person = {
+    id: generatedId(),
+    name: body.name,
+    number: body.number,
+  };
+
+  persons = persons.concat(person);
+
+  response.json(persons);
+});
+
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
 console.log(new Date().toString());
+console.log(Math.floor(Math.random() * 1000));
