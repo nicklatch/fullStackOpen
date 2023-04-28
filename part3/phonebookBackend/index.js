@@ -1,10 +1,18 @@
 const express = require("express");
-const app = express();
 const morgan = require("morgan");
+const app = express();
 
 // morgan.token("data", function (request, response) {}); //TODO: create toekn for exercise 3.8*
 app.use(express.json());
-app.use(morgan("tiny", "data"));
+morgan.token("body", (request, reponse) => {
+  return request.get("content-type") === "application/json"
+    ? JSON.stringify(request.body)
+    : "";
+});
+
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms :body")
+);
 
 let persons = [
   {
