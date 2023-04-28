@@ -1,8 +1,10 @@
 const express = require("express");
-const { get } = require("http");
 const app = express();
+const morgan = require("morgan");
 
+// morgan.token("data", function (request, response) {}); //TODO: create toekn for exercise 3.8*
 app.use(express.json());
+app.use(morgan("tiny", "data"));
 
 let persons = [
   {
@@ -84,4 +86,3 @@ app.listen(PORT, () => {
 });
 
 console.log(new Date().toString());
-console.log(Math.floor(Math.random() * 1000));
