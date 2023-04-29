@@ -6,6 +6,8 @@ const morgan = require("morgan");
 
 // morgan.token("data", function (request, response) {}); //TODO: create toekn for exercise 3.8*
 app.use(express.json());
+app.use(express.static("dist"));
+app.use(cors());
 app.use(morgan("tiny", "data"));
 
 let persons = [
