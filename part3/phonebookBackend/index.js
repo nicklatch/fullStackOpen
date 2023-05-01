@@ -1,40 +1,25 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const process = require("process");
-const app = express();
+const Person = require("./models/person");
 const morgan = require("morgan");
+const app = express();
 
-// morgan.token("data", function (request, response) {}); //TODO: create toekn for exercise 3.8*
 app.use(express.json());
 app.use(express.static("dist"));
 app.use(cors());
-app.use(morgan("tiny", "data"));
-
-let persons = [
-  {
-    id: 1,
-    name: "Arto Hellas",
-    number: "040-123456",
-  },
-  {
-    id: 2,
-    name: "Ada Lovelace",
-    number: "39-44-5323523",
-  },
-  {
-    id: 3,
-    name: "Dan Abramov",
-    number: "12-43-234345",
-  },
-  {
-    id: 4,
-    name: "Mary Poppendieck",
-    number: "39-23-6423122",
-  },
-];
+morgan.token("body", (req) => {
+  return JSON.stringify(req.body);
+});
+app.use(
+  morgan(":method :url :status :res[content-length] :response-time ms :body")
+);
 
 app.get("/api/persons/", (request, response) => {
-  response.json(persons);
+  Person.find({}).then((persons) => {
+    response.json(persons);
+  });
 });
 
 app.get("/api/persons/:id", (request, response) => {
@@ -57,36 +42,28 @@ app.delete("/api/persons/:id", (request, response) => {
   response.status(204).end();
 });
 
-const generatedId = () => {
-  const maxId = Math.floor(Math.random() * 1000);
-  return persons.find((person) => person.id !== maxId) ? maxId : generatedId();
-};
-
 app.post("/api/persons/", (request, response) => {
   const body = request.body;
-  if (!body.name && !body.number) {
+
+  if (body.name === undefined || body.number === undefined) {
     return response.status(400).json({
       error: "Name and/or Number Missing",
     });
-  } else if (persons.find((person) => person.name === body.name)) {
-    return response.status(400).json({
-      error: "Name Already Exists in Phonebook",
-    });
   }
-  const person = {
-    id: generatedId(),
+
+  const person = new Person({
     name: body.name,
     number: body.number,
-  };
+  });
 
-  persons = persons.concat(person);
-
-  response.json(persons);
+  person.save().then((savedPerson) => {
+    response.json(savedPerson);
+  });
 });
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Listening on port ${PORT}`);
 });
 
 console.log(new Date().toString());

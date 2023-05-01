@@ -1,9 +1,6 @@
 const mongoose = require("mongoose");
-
 const cliLength = process.argv.length;
-
 const password = process.argv[2];
-
 const url = `mongodb+srv://nicklatcham:${password}@fullstackone.lxnhe7w.mongodb.net/phonebookApp?retryWrites=true&w=majority`;
 
 mongoose.set("strictQuery", false);
