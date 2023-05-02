@@ -8,6 +8,7 @@ const SubmissionForm = ({
   persons,
   setPersons,
   setMessage,
+  setError,
 }) => {
   const addPerson = (event) => {
     event.preventDefault();
@@ -43,6 +44,12 @@ const SubmissionForm = ({
             setTimeout(() => {
               setMessage("");
             }, 5000);
+          })
+          .catch((error) => {
+            setError(error.response.data.error);
+            setTimeout(() => {
+              setMessage("");
+            }, 5000);
           });
       }
     } else {
@@ -56,7 +63,13 @@ const SubmissionForm = ({
         .then(() => {
           setMessage(`Added ${nameObject.name}`);
           setTimeout(() => {
-            setMessage("");
+            setError("");
+          }, 5000);
+        })
+        .catch((error) => {
+          setError(error.response.data.error);
+          setTimeout(() => {
+            setError("");
           }, 5000);
         });
     }

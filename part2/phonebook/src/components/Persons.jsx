@@ -1,6 +1,6 @@
 import peopleService from "../services/persons";
 
-const Persons = ({ persons, search, setPersons, setError }) => {
+const Persons = ({ persons, search, setPersons, setError, setMessage }) => {
   const results = persons.filter((person) => {
     return person.name.toLowerCase().includes(String(search).toLowerCase());
   });
@@ -17,6 +17,12 @@ const Persons = ({ persons, search, setPersons, setError }) => {
             .getAll()
             .then((personsRemaing) => setPersons(personsRemaing))
         )
+        .then(() => {
+          setMessage(`Deleted ${name}`);
+          setTimeout(() => {
+            setMessage("");
+          }, 5000);
+        })
         .catch((error) => {
           console.log(error);
           setError(
