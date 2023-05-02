@@ -39,11 +39,13 @@ app.get("/api/persons/:id", (request, response, next) => {
 });
 
 app.get("/info/", (request, response) => {
-  response.send(
-    `<p>Phonebook has info for ${Person.countDocuments({}).then((results) =>
-      response.json(results)
-    )} people</p></ br><p>${new Date().toString()}</p>`
-  );
+  Person.countDocuments({})
+    .then((result) => {
+      response.send(
+        `<p>Phonebook has info for ${result} people</p></ br><p>${new Date().toString()}</p>`
+      );
+    })
+    .catch((error) => next(error));
 });
 
 app.delete("/api/persons/:id", (request, response, next) => {
