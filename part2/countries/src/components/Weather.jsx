@@ -26,8 +26,8 @@ export default function Weather({ capitalInfo }) {
     <h2>...Loading</h2>
   ) : (
     <>
-      <h3>Weather in {weatherData.name}</h3>
-      <Text>Temperature: {weatherData.main.temp}&#176; Fahrenheit </Text>
+      <h2>Weather in {weatherData.name}</h2>
+      <Text>Temperature: {Math.floor(weatherData.main.temp)}&#176; Fahrenheit </Text>
       <div>
         <img
           src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}

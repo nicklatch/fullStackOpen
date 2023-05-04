@@ -10,7 +10,7 @@ const SearchBar = ({ search, setSearch }) => {
       placeholder="Find Countries"
       onChange={handleSearchChange}
       value={search}
-      style={{ width: "30vw", marginTop: 10 }}
+      style={{ width: "30vw", marginTop: 10, boxShadow: "0 0 10px 1px rgba(255, 255, 255, 0.1)"}}
     />
   );
 };
