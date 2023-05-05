@@ -64,8 +64,6 @@ const biggerList = [
   },
 ];
 
-console.log(totalLikes(biggerList));
-
 module.exports = {
   dummy,
   totalLikes,
