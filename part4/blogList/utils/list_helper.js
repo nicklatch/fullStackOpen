@@ -10,6 +10,19 @@ const totalLikes = (listOfBlogs) => {
   }
 };
 
+const favoriteBlog = (listOfBlogs) => {
+  const result = Math.max(...listOfBlogs.map((blog) => blog.likes));
+  return listOfBlogs.find((blog) => {
+    if (blog.likes === result) {
+      return result;
+    }
+  });
+};
+
+const mostBlogs = () => {
+  //...
+};
+
 const listWithOneBlog = [
   {
     _id: '5a422a851b54a676234d17f7',
@@ -67,6 +80,7 @@ const biggerList = [
 module.exports = {
   dummy,
   totalLikes,
+  favoriteBlog,
   listWithOneBlog,
   biggerList,
 };
