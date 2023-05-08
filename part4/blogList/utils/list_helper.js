@@ -1,4 +1,5 @@
-const dummy = (blogs) => 1;
+// eslint-disable-next-line no-unused-vars
+const dummy = (blogs) => 1; //dummy function, leave as is
 
 const totalLikes = (listOfBlogs) => {
   if (listOfBlogs.length === 1) {
@@ -17,10 +18,6 @@ const favoriteBlog = (listOfBlogs) => {
       return result;
     }
   });
-};
-
-const mostBlogs = () => {
-  //...
 };
 
 const listWithOneBlog = [
