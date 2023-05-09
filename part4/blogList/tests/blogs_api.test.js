@@ -12,7 +12,7 @@ beforeEach(async () => {
     let blogObject = new Blog(blog);
     await blogObject.save();
   }
-});
+}, 10000);
 
 test('blogs are returned as JSON', async () => {
   await api
@@ -32,7 +32,17 @@ test('blogs all have defined id', async () => {
   blogs.forEach((blog) => expect(blog.id).toBeDefined());
 });
 
-// !left off at completeion of 4.9
+// !left off at completeion of 4.10
+test('new blog is added', async () => {
+  const newBlog = new Blog({
+    title: 'A new Blog',
+    authour: 'Sum Gui',
+    url: 'www.nope.no',
+    likes: 430018,
+  });
+
+  api.post('/api/blogs'); //Left off rigth here 4.10
+});
 
 afterAll(async () => {
   await mongoose.connection.close();
