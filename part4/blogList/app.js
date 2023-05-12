@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('express-async-errors');
 const config = require('./utils/config');
 const express = require('express');
 const app = express();
@@ -28,7 +29,6 @@ app.use(cors());
 app.use(express.json());
 app.use(middleware.tokenExtractor);
 app.use(middleware.userExtractor);
-// app.use(middleware.requestLogger);
 app.use(morgan('tiny'));
 app.use('/api/login', loginRouter);
 app.use('/api/users', usersRouter);
