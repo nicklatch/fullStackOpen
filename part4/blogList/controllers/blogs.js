@@ -44,6 +44,18 @@ blogsRouter.post('/', async (request, response) => {
 
 blogsRouter.put('/:id', async (request, response) => {
   const { title, author, url, likes } = request.body;
+  const blogToUpdate = await Blog.findByIdAndUpdate(request.params.id);
+  const requestingUser = request.user;
+  console.log(requestingUser.id, String(blogToUpdate.user));
+
+  if (requestingUser === undefined) {
+    return response.status(401).json({ error: 'You must be logged in' });
+  } else if (requestingUser.id !== String(blogToUpdate.user)) {
+    return response
+      .status(401)
+      .json({ error: 'You do not have permission to remove this blog' })
+      .end();
+  }
 
   const updatedBlog = await Blog.findByIdAndUpdate(
     request.params.id,
@@ -57,10 +69,9 @@ blogsRouter.put('/:id', async (request, response) => {
 blogsRouter.delete('/:id', async (request, response) => {
   const user = request.user;
   const blogToRemove = await Blog.findById(request.params.id);
-  //TODO: Error handeling for no blog, no user auth
   if (user === undefined) {
     return response.status(401).json({ error: 'You must be logged in' });
-  } else if (String(user.id) !== String(blogToRemove.user)) {
+  } else if (user.id !== String(blogToRemove.user)) {
     return response
       .status(401)
       .json({ error: 'You do not have permission to remove this blog' })
