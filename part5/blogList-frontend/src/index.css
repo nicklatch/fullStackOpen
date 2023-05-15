@@ -14,6 +14,37 @@
   -webkit-text-size-adjust: 100%;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.note {
+  color: grey;
+  padding-top: 5px;
+  font-size: 15px;
+}
+
+.notification {
+  color: green;
+  background-color: lightgray;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  background-color: lightgray;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
 /* a {
   font-weight: 500;
   color: #646cff;

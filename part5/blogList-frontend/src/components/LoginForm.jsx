@@ -1,9 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import blogService from '../services/blogs';
 import loginService from '../services/login';
 
-const LoginForm = ({ setUser }) => {
+const LoginForm = ({ setUser, setErrorMessage }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -17,7 +18,10 @@ const LoginForm = ({ setUser }) => {
       setUsername('');
       setPassword('');
     } catch (exception) {
-      console.log(exception);
+      setErrorMessage('Invalid Username or Password');
+      setTimeout(() => {
+        setErrorMessage('');
+      }, 5000);
     }
     console.log(`${username} is logged in`);
   };

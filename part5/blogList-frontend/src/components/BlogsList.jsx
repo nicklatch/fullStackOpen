@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import Blog from './Blog';
 import blogService from '../services/blogs';
+import BlogForm from './BlogForm';
 
-const BlogsList = () => {
+const BlogsList = ({ setNotification }) => {
   const [blogs, setBlogs] = useState([]);
 
   useEffect(() => {
@@ -11,6 +12,11 @@ const BlogsList = () => {
 
   return (
     <>
+      <BlogForm
+        blogs={blogs}
+        setBlogs={setBlogs}
+        setNotification={setNotification}
+      />
       {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
       ))}

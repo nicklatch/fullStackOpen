@@ -1,7 +1,8 @@
-const Header = ({ user }) => {
-  const handleLogout = (event) => {
+/* eslint-disable react/prop-types */
+const Header = ({ user, setUser }) => {
+  const handleLogout = () => {
     window.localStorage.clear();
-    window.location.reload();
+    setUser(null);
   };
 
   return (
