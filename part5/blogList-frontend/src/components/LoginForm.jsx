@@ -23,7 +23,6 @@ const LoginForm = ({ setUser, setErrorMessage }) => {
         setErrorMessage('');
       }, 5000);
     }
-    console.log(`${username} is logged in`);
   };
 
   useEffect(() => {
