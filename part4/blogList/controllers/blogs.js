@@ -49,13 +49,14 @@ blogsRouter.put('/:id', async (request, response) => {
   console.log(requestingUser.id, String(blogToUpdate.user));
 
   if (requestingUser === undefined) {
-    return response.status(401).json({ error: 'You must be logged in' });
-  } else if (requestingUser.id !== String(blogToUpdate.user)) {
-    return response
-      .status(401)
-      .json({ error: 'You do not have permission to remove this blog' })
-      .end();
+    return response.status(401).json({ error: 'You must be logged in' }).end();
   }
+  // } else if (requestingUser.id !== String(blogToUpdate.user)) {
+  //   return response
+  //     .status(401)
+  //     .json({ error: 'You do not have permission to remove this blog' })
+  //     .end();
+  // }
 
   const updatedBlog = await Blog.findByIdAndUpdate(
     request.params.id,

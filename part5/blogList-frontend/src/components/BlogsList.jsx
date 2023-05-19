@@ -1,18 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useEffect, Suspense } from 'react';
 import Blog from './Blog';
 import blogService from '../services/blogs';
-import Toggle from './Toggle';
 
-const BlogsList = ({ blogs, setBlogs }) => {
+const BlogsList = ({ blogs, setBlogs, setErrorMessage }) => {
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
 
   return (
     <>
-      {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
-      ))}
+      <Suspense fallback={<span>loading</span>}>
+        {blogs
+          .map((blog) => (
+            <Blog key={blog.id} blog={blog} setErrorMessage={setErrorMessage} />
+          ))
+          .sort()}
+      </Suspense>
     </>
   );
 };

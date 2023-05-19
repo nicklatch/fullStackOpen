@@ -37,39 +37,40 @@ const BlogForm = ({ createBlog, setNotification }) => {
   return (
     <>
       <form>
-        <label>
-          Title:
+        <span>
+          <label htmlFor='title'>Title: </label>
           <input
+            id='title'
             type='text'
             value={newBlogTitle}
             name='Title'
             onChange={handleTitleChange}
           />
-        </label>
-        <label>
-          {' '}
-          Author:
+        </span>
+        <span>
+          <label htmlFor='author'>Author: </label>
           <input
+            id='author'
             type='text'
             value={newBlogAuthor}
             name='Author'
             onChange={handleAuthorChange}
           />
-        </label>
-        <label>
-          {' '}
-          URL:
+        </span>
+        <span>
+          <label htmlFor='url'>URL: </label>
           <input
+            id='url'
             type='text'
             value={newBlogUrl}
             name='URL'
             onChange={handleUrlChange}
           />
-        </label>
-        <button type='submit' onClick={addBlog}>
-          Create
-        </button>
+        </span>
       </form>
+      <button type='submit' onClick={addBlog}>
+        Create
+      </button>
       <br />
     </>
   );

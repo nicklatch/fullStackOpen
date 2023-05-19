@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import blogService from './services/blogs';
 import BlogsList from './components/BlogsList';
 import Header from './components/Header';
@@ -16,11 +16,10 @@ const App = () => {
 
   const blogFormRef = useRef();
 
-  const addBlog = (blogObject) => {
+  const addBlog = async (blogObject) => {
     blogFormRef.current.toggleVisibility();
-    blogService.create(blogObject).then((returnedBlog) => {
-      setBlogs(blogs.concat(returnedBlog));
-    });
+    const response = await blogService.create(blogObject);
+    setBlogs(blogs.concat(response.data));
   };
 
   return (
@@ -39,8 +38,11 @@ const App = () => {
           >
             <BlogForm createBlog={addBlog} setNotification={setNotification} />
           </Toggle>
-          <br />
-          <BlogsList blogs={blogs} setBlogs={setBlogs} />
+          <BlogsList
+            blogs={blogs}
+            setBlogs={setBlogs}
+            setErrorMessage={setErrorMessage}
+          />
         </>
       )}
     </>
