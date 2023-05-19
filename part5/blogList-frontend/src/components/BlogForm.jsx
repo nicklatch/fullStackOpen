@@ -1,30 +1,25 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
-import blogService from '../services/blogs';
 
-const BlogForm = ({ blogs, setBlogs, setNotification }) => {
+const BlogForm = ({ createBlog, setNotification }) => {
   const [newBlogTitle, setNewBlogTitle] = useState('');
   const [newBlogAuthor, setNewBlogAuthor] = useState('');
   const [newBlogUrl, setNewBlogUrl] = useState('');
 
   const addBlog = (event) => {
     event.preventDefault();
-    const blogObject = {
+    createBlog({
       title: newBlogTitle,
       author: newBlogAuthor,
       url: newBlogUrl,
-    };
-
-    blogService.create(blogObject).then((addedBlog) => {
-      setBlogs(blogs.concat(addedBlog));
-      setNotification(`${newBlogTitle} by ${newBlogAuthor} has been added!`);
-      setTimeout(() => {
-        setNotification('');
-      }, 5000);
-      setNewBlogTitle('');
-      setNewBlogAuthor('');
-      setNewBlogUrl('');
     });
+    setNotification(`${newBlogTitle} by ${newBlogAuthor} has been added!`);
+    setTimeout(() => {
+      setNotification('');
+    }, 5000);
+    setNewBlogTitle('');
+    setNewBlogAuthor('');
+    setNewBlogUrl('');
   };
 
   const handleTitleChange = (event) => {
@@ -72,7 +67,7 @@ const BlogForm = ({ blogs, setBlogs, setNotification }) => {
           />
         </label>
         <button type='submit' onClick={addBlog}>
-          Submit
+          Create
         </button>
       </form>
       <br />

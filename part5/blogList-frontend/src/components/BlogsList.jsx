@@ -1,22 +1,15 @@
 import { useState, useEffect } from 'react';
 import Blog from './Blog';
 import blogService from '../services/blogs';
-import BlogForm from './BlogForm';
+import Toggle from './Toggle';
 
-const BlogsList = ({ setNotification }) => {
-  const [blogs, setBlogs] = useState([]);
-
+const BlogsList = ({ blogs, setBlogs }) => {
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
 
   return (
     <>
-      <BlogForm
-        blogs={blogs}
-        setBlogs={setBlogs}
-        setNotification={setNotification}
-      />
       {blogs.map((blog) => (
         <Blog key={blog.id} blog={blog} />
       ))}
