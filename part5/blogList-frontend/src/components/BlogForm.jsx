@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 
-const BlogForm = ({ createBlog, setNotification }) => {
+const BlogForm = ({ createBlog, setNotification, user }) => {
   const [newBlogTitle, setNewBlogTitle] = useState('');
   const [newBlogAuthor, setNewBlogAuthor] = useState('');
   const [newBlogUrl, setNewBlogUrl] = useState('');
@@ -12,6 +12,7 @@ const BlogForm = ({ createBlog, setNotification }) => {
       title: newBlogTitle,
       author: newBlogAuthor,
       url: newBlogUrl,
+      name: user.name,
     });
     setNotification(`${newBlogTitle} by ${newBlogAuthor} has been added!`);
     setTimeout(() => {

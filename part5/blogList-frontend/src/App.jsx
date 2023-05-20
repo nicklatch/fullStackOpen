@@ -16,10 +16,11 @@ const App = () => {
 
   const blogFormRef = useRef();
 
-  const addBlog = async (blogObject) => {
+  const addBlog = (blogObject) => {
     blogFormRef.current.toggleVisibility();
-    const response = await blogService.create(blogObject);
-    setBlogs(blogs.concat(response.data));
+    blogService.create(blogObject).then((returnedBlog) => {
+      setBlogs(blogs.concat(returnedBlog));
+    });
   };
 
   return (
@@ -36,12 +37,17 @@ const App = () => {
             buttonLabelTwo='Cancel'
             ref={blogFormRef}
           >
-            <BlogForm createBlog={addBlog} setNotification={setNotification} />
+            <BlogForm
+              createBlog={addBlog}
+              setNotification={setNotification}
+              user={user}
+            />
           </Toggle>
           <BlogsList
             blogs={blogs}
             setBlogs={setBlogs}
             setErrorMessage={setErrorMessage}
+            user={user}
           />
         </>
       )}

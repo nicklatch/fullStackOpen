@@ -1,7 +1,7 @@
 import { Suspense, useState } from 'react';
 import blogService from '../services/blogs';
 
-const Blog = ({ blog, setErrorMessage }) => {
+const Blog = ({ blog, setErrorMessage, user }) => {
   const [buttonName, setButtonName] = useState('View');
   const [visibility, setVisiblity] = useState(false);
   const [blogLikes, setBlogLikes] = useState(blog.likes);
@@ -64,7 +64,7 @@ const Blog = ({ blog, setErrorMessage }) => {
           <span id='likes'>{blogLikes} </span>
           <button onClick={handleLikeButton}>like</button>
         </span>
-        <span>{blog.user.name}</span>
+        <span>{!blog.user.name ? user.name : blog.user.name}</span>
       </div>
     </div>
   );
