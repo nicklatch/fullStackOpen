@@ -2,7 +2,7 @@ import { useEffect, Suspense } from 'react';
 import Blog from './Blog';
 import blogService from '../services/blogs';
 
-const BlogsList = ({ blogs, setBlogs, setErrorMessage, user }) => {
+const BlogsList = ({ blogs, setBlogs, setErrorMessage, user, removeBlog }) => {
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
@@ -17,6 +17,7 @@ const BlogsList = ({ blogs, setBlogs, setErrorMessage, user }) => {
               blog={blog}
               setErrorMessage={setErrorMessage}
               user={user}
+              removeBlog={removeBlog}
             />
           ))
           .sort()}

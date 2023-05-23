@@ -1,7 +1,7 @@
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 import blogService from '../services/blogs';
 
-const Blog = ({ blog, setErrorMessage, user }) => {
+const Blog = ({ blog, setErrorMessage, user, removeBlog }) => {
   const [buttonName, setButtonName] = useState('View');
   const [visibility, setVisiblity] = useState(false);
   const [blogLikes, setBlogLikes] = useState(blog.likes);
@@ -28,6 +28,10 @@ const Blog = ({ blog, setErrorMessage, user }) => {
         setErrorMessage(null);
       }, 5000);
     }
+  };
+
+  const handleRemove = () => {
+    removeBlog(blog.id);
   };
 
   const stylesMain = {
@@ -65,6 +69,9 @@ const Blog = ({ blog, setErrorMessage, user }) => {
           <button onClick={handleLikeButton}>like</button>
         </span>
         <span>{!blog.user.name ? user.name : blog.user.name}</span>
+        {blog.user.id === user.id ? (
+          <button onClick={handleRemove}>Remove</button>
+        ) : null}
       </div>
     </div>
   );

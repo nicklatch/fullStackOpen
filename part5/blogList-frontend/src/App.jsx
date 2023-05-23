@@ -23,6 +23,21 @@ const App = () => {
     });
   };
 
+  const removeBlog = async (blogId) => {
+    if (window.confirm('Delete this blog post?')) {
+      await blogService.remove(blogId);
+      setBlogs(
+        blogs.filter((blog) => {
+          return blog.id !== blogId && blog;
+        })
+      );
+      setNotification('Succesfully removed');
+      setTimeout(() => {
+        setNotification('');
+      }, 5000);
+    }
+  };
+
   return (
     <>
       <Header user={user} setUser={setUser} />
@@ -48,6 +63,7 @@ const App = () => {
             setBlogs={setBlogs}
             setErrorMessage={setErrorMessage}
             user={user}
+            removeBlog={removeBlog}
           />
         </>
       )}
