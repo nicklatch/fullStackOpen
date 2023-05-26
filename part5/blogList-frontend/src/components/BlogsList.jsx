@@ -1,6 +1,7 @@
 import { useEffect, Suspense } from 'react';
 import Blog from './Blog';
 import blogService from '../services/blogs';
+import PropTypes from 'prop-types';
 
 const BlogsList = ({ blogs, setBlogs, setErrorMessage, user, removeBlog }) => {
   useEffect(() => {
@@ -24,6 +25,14 @@ const BlogsList = ({ blogs, setBlogs, setErrorMessage, user, removeBlog }) => {
       </Suspense>
     </>
   );
+};
+
+BlogsList.propTypes = {
+  blogs: PropTypes.array.isRequired,
+  setBlogs: PropTypes.func.isRequired,
+  setErrorMessage: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  removeBlog: PropTypes.func.isRequired,
 };
 
 export default BlogsList;

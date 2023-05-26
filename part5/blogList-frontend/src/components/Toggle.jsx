@@ -1,4 +1,5 @@
 import { forwardRef, useImperativeHandle, useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Toggle = forwardRef((props, refs) => {
   const [visibility, setVisiblity] = useState(false);
@@ -31,5 +32,13 @@ const Toggle = forwardRef((props, refs) => {
     </>
   );
 });
+
+Toggle.displayName = 'Toggle';
+
+Toggle.propTypes = {
+  buttonLabelOne: PropTypes.string.isRequired,
+  buttonLabelTwo: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 export default Toggle;

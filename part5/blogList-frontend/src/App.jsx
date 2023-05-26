@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import blogService from './services/blogs';
 import BlogsList from './components/BlogsList';
 import Header from './components/Header';

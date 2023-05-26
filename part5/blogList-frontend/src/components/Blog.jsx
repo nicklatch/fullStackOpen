@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import blogService from '../services/blogs';
+import PropTypes from 'prop-types';
 
 const Blog = ({ blog, setErrorMessage, user, removeBlog }) => {
   const [buttonName, setButtonName] = useState('View');
@@ -75,6 +76,13 @@ const Blog = ({ blog, setErrorMessage, user, removeBlog }) => {
       </div>
     </div>
   );
+};
+
+Blog.propTypes = {
+  blog: PropTypes.object.isRequired,
+  setErrorMessage: PropTypes.func.isRequired,
+  user: PropTypes.object.isRequired,
+  removeBlog: PropTypes.func.isRequired,
 };
 
 export default Blog;

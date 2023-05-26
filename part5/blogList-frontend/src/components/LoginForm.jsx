@@ -1,8 +1,7 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable react/prop-types */
 import { useEffect, useState } from 'react';
 import blogService from '../services/blogs';
 import loginService from '../services/login';
+import PropTypes from 'prop-types';
 
 const LoginForm = ({ setUser, setErrorMessage }) => {
   const [username, setUsername] = useState('');
@@ -62,6 +61,11 @@ const LoginForm = ({ setUser, setErrorMessage }) => {
       </span>
     </form>
   );
+};
+
+LoginForm.propTypes = {
+  setUser: PropTypes.func.isRequired,
+  setErrorMessage: PropTypes.func.isRequired,
 };
 
 export default LoginForm;
