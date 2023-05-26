@@ -60,7 +60,7 @@ const Blog = ({ blog, setErrorMessage, user, removeBlog }) => {
       </h4>
       <div style={shownVisibility}>
         <span>
-          <a id='url' href={blog.url}>
+          <a id='url' href={`https://${blog.url}/`}>
             {blog.url}
           </a>
         </span>

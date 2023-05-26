@@ -8,6 +8,8 @@ const BlogsList = ({ blogs, setBlogs, setErrorMessage, user, removeBlog }) => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
 
+  blogs.sort((a, b) => b.likes - a.likes);
+
   return (
     <>
       <Suspense fallback={<span>loading</span>}>
