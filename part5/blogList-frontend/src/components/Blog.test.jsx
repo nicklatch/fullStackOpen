@@ -4,12 +4,6 @@ import { render, screen } from '@testing-library/react';
 import { expect } from 'vitest';
 import Blog from './Blog';
 
-const user = {
-  username: 'nicklatcham',
-  name: 'Nick Latcham',
-  id: '5f9d4a3b1c9d440000b6d9b5',
-};
-
 test('<Blog /> renders content', () => {
   const user = {
     username: 'nicklatcham',
