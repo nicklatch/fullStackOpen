@@ -53,12 +53,12 @@ const Blog = ({ blog, setErrorMessage, user, removeBlog }) => {
   };
 
   return (
-    <div key={blog.id} style={stylesMain}>
+    <div key={blog.id} style={stylesMain} className='blog'>
       <h4 style={titleAuthor}>
         {blog.title}, {blog.author}{' '}
         <button onClick={toggleVisibility}>{buttonName}</button>
       </h4>
-      <div style={shownVisibility}>
+      <div style={shownVisibility} className='togglable'>
         <span>
           <a id='url' href={`https://${blog.url}/`}>
             {blog.url}
@@ -80,7 +80,7 @@ const Blog = ({ blog, setErrorMessage, user, removeBlog }) => {
 
 Blog.propTypes = {
   blog: PropTypes.object.isRequired,
-  setErrorMessage: PropTypes.func.isRequired,
+  setErrorMessage: PropTypes.func,
   user: PropTypes.object.isRequired,
   removeBlog: PropTypes.func.isRequired,
 };
