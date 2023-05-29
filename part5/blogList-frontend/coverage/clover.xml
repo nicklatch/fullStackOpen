@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1685325536530" clover="3.2.0">
-  <project timestamp="1685325536530" name="All files">
-    <metrics statements="131" coveredstatements="101" conditionals="9" coveredconditionals="5" methods="9" coveredmethods="3" elements="149" coveredelements="109" complexity="0" loc="131" ncloc="131" packages="2" files="2" classes="2"/>
+<coverage generated="1685329902633" clover="3.2.0">
+  <project timestamp="1685329902633" name="All files">
+    <metrics statements="147" coveredstatements="117" conditionals="9" coveredconditionals="5" methods="9" coveredmethods="3" elements="165" coveredelements="125" complexity="0" loc="147" ncloc="147" packages="3" files="3" classes="3"/>
     <package name="components">
       <metrics statements="92" coveredstatements="85" conditionals="9" coveredconditionals="5" methods="4" coveredmethods="3"/>
       <file name="Blog.jsx" path="/home/nicklatcham/Repos/webDev/fullStackOpen/part5/blogList-frontend/src/components/Blog.jsx">
@@ -98,6 +98,28 @@
         <line num="90" count="1" type="stmt"/>
         <line num="91" count="1" type="stmt"/>
         <line num="92" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="mock">
+      <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="mockData.js" path="/home/nicklatcham/Repos/webDev/fullStackOpen/part5/blogList-frontend/src/mock/mockData.js">
+        <metrics statements="16" coveredstatements="16" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
       </file>
     </package>
     <package name="services">
