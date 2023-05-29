@@ -56,7 +56,9 @@ const Blog = ({ blog, setErrorMessage, user, removeBlog }) => {
     <div key={blog.id} style={stylesMain} className='blog'>
       <h4 style={titleAuthor}>
         {blog.title}, {blog.author}{' '}
-        <button onClick={toggleVisibility}>{buttonName}</button>
+        <button className='toggleButton' onClick={toggleVisibility}>
+          {buttonName}
+        </button>
       </h4>
       <div style={shownVisibility} className='togglable'>
         <span>
@@ -67,7 +69,9 @@ const Blog = ({ blog, setErrorMessage, user, removeBlog }) => {
         <span>
           <label htmlFor='likes'>Likes: </label>
           <span id='likes'>{blogLikes} </span>
-          <button onClick={handleLikeButton}>like</button>
+          <button className='likeButton' onClick={handleLikeButton}>
+            like
+          </button>
         </span>
         <span>{!blog.user.name ? user.name : blog.user.name}</span>
         {blog.user.id === user.id ? (
@@ -82,7 +86,7 @@ Blog.propTypes = {
   blog: PropTypes.object.isRequired,
   setErrorMessage: PropTypes.func,
   user: PropTypes.object.isRequired,
-  removeBlog: PropTypes.func.isRequired,
+  removeBlog: PropTypes.func,
 };
 
 export default Blog;
