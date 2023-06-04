@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import blogService from '../services/blogs';
 import loginService from '../services/login';
 import PropTypes from 'prop-types';
@@ -6,6 +6,15 @@ import PropTypes from 'prop-types';
 const LoginForm = ({ setUser, setErrorMessage }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      blogService.setToken(user.token);
+    }
+  }, []);
 
   const handleLogin = async (event) => {
     event.preventDefault();
@@ -24,15 +33,6 @@ const LoginForm = ({ setUser, setErrorMessage }) => {
     }
   };
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogUser');
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
-      blogService.setToken(user.token);
-    }
-  }, []);
-
   return (
     <form>
       <h2>Please Login</h2>
@@ -40,22 +40,24 @@ const LoginForm = ({ setUser, setErrorMessage }) => {
         <label>
           Username:{' '}
           <input
-            type='text'
+            type="text"
             value={username}
-            name='Username'
+            name="Username"
+            id="username"
             onChange={({ target }) => setUsername(target.value)}
           />
         </label>{' '}
         <label>
           Password:{' '}
           <input
-            type='text'
+            type="text"
             value={password}
-            name='Password'
+            name="Password"
+            id="password"
             onChange={({ target }) => setPassword(target.value)}
           />
         </label>{' '}
-        <button type='submit' onClick={handleLogin}>
+        <button type="submit" onClick={handleLogin}>
           Login
         </button>
       </span>

@@ -48,8 +48,8 @@ const App = () => {
       ) : (
         <>
           <Toggle
-            buttonLabelOne='New Blog'
-            buttonLabelTwo='Cancel'
+            buttonLabelOne="New Blog"
+            buttonLabelTwo="Cancel"
             ref={blogFormRef}
           >
             <BlogForm

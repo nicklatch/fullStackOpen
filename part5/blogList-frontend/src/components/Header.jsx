@@ -11,7 +11,10 @@ const Header = ({ user, setUser }) => {
       {user ? (
         <>
           <p>
-            {user.name} <button onClick={handleLogout}>Logout</button>
+            {user.name}{' '}
+            <button id="logout" onClick={handleLogout}>
+              Logout
+            </button>
           </p>
         </>
       ) : null}

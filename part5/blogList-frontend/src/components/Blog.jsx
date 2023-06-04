@@ -53,29 +53,31 @@ const Blog = ({ blog, setErrorMessage, user, removeBlog }) => {
   };
 
   return (
-    <div key={blog.id} style={stylesMain} className='blog'>
+    <div key={blog.id} style={stylesMain} className="blog">
       <h4 style={titleAuthor}>
         {blog.title}, {blog.author}{' '}
-        <button className='toggleButton' onClick={toggleVisibility}>
+        <button className="toggleButton" onClick={toggleVisibility}>
           {buttonName}
         </button>
       </h4>
-      <div style={shownVisibility} className='togglable'>
+      <div style={shownVisibility} className="togglable">
         <span>
-          <a id='url' href={`https://${blog.url}/`}>
+          <a id="url" href={`https://${blog.url}/`}>
             {blog.url}
           </a>
         </span>
         <span>
-          <label htmlFor='likes'>Likes: </label>
-          <span id='likes'>{blogLikes} </span>
-          <button className='likeButton' onClick={handleLikeButton}>
+          <label htmlFor="likes">Likes: </label>
+          <span id="likes">{blogLikes} </span>
+          <button className="likeButton" onClick={handleLikeButton}>
             like
           </button>
         </span>
         <span>{!blog.user.name ? user.name : blog.user.name}</span>
         {blog.user.id === user.id ? (
-          <button onClick={handleRemove}>Remove</button>
+          <button id="remove-button" onClick={handleRemove}>
+            Remove
+          </button>
         ) : null}
       </div>
     </div>

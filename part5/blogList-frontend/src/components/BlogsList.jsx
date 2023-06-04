@@ -11,7 +11,7 @@ const BlogsList = ({ blogs, setBlogs, setErrorMessage, user, removeBlog }) => {
   blogs.sort((a, b) => b.likes - a.likes);
 
   return (
-    <>
+    <div id="blog-list">
       <Suspense fallback={<span>loading</span>}>
         {blogs
           .map((blog) => (
@@ -25,7 +25,7 @@ const BlogsList = ({ blogs, setBlogs, setErrorMessage, user, removeBlog }) => {
           ))
           .sort()}
       </Suspense>
-    </>
+    </div>
   );
 };
 
