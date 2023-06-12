@@ -15,7 +15,12 @@ const Anecdote = ({ anecdote }) => {
 };
 
 const AnecdoteList = () => {
-  const anecdotes = useSelector((state) => state);
+  const anecdotes = useSelector(({ anecdotes, filter }) => {
+    if (filter === 'ALL') {
+      return anecdotes;
+    }
+    return filter === 'SEARCH';
+  });
   return (
     <>
       {anecdotes.map((anecdote) => {
