@@ -7,7 +7,7 @@ const anecdotesAtStart = [
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
 ];
 
-const getId = () => Math.floor(Math.random() * 1000);
+const getId = () => Number(Math.floor(Math.random() * 100000));
 
 const asObject = (anecdote) => {
   return {
