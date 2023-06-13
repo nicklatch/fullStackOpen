@@ -1,14 +1,17 @@
 import { useDispatch } from 'react-redux';
+import { setFilterChange } from '../reducers/filterReducer';
 
 const Filter = () => {
-  const dispatch = useDispatch;
-  const handleChange = (event) => {
-    dispatch(event.target.value);
-  };
+  const dispatch = useDispatch();
   return (
     <>
       <label htmlFor="filter">Filter </label>
-      <input type="search" id="filter" name="filter" onChange={handleChange} />
+      <input
+        type="search"
+        id="filter"
+        name="filter"
+        onChange={(event) => dispatch(setFilterChange(event.target.value))}
+      />
     </>
   );
 };

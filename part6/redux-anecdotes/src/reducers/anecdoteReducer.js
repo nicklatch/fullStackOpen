@@ -7,7 +7,7 @@ const initialState = {
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
   ],
-  filter: String(),
+  filter: '',
 };
 
 const getId = () => Number(Math.floor(Math.random() * 100000));
@@ -21,9 +21,8 @@ const asObject = (anecdote) => {
 };
 
 const initialAnecdotes = initialState['anecdotes'].map(asObject);
-console.log(initialAnecdotes);
 
-const reducer = (state = initialAnecdotes, action) => {
+const anecdoteReducer = (state = initialAnecdotes, action) => {
   let id, anecdoteGettingVote, updatedAnecdote;
 
   switch (action.type) {
@@ -62,4 +61,4 @@ export const createAnecdote = (content) => {
   };
 };
 
-export default reducer;
+export default anecdoteReducer;

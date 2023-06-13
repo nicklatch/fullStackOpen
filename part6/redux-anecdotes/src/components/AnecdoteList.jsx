@@ -16,11 +16,15 @@ const Anecdote = ({ anecdote }) => {
 
 const AnecdoteList = () => {
   const anecdotes = useSelector(({ anecdotes, filter }) => {
-    if (filter === 'ALL') {
+    if (filter === 'ALL' || filter === '') {
       return anecdotes;
+    } else {
+      return anecdotes.filter((anecdote) => {
+        return anecdote.content.toLowerCase().includes(filter.toLowerCase());
+      });
     }
-    return filter === 'SEARCH';
   });
+
   return (
     <>
       {anecdotes.map((anecdote) => {
