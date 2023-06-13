@@ -6,7 +6,7 @@ const Anecdote = ({ anecdote }) => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(captureVote(anecdote.id));
-    dispatch(createNotification(`You voted for ${anecdote.content}`));
+    dispatch(createNotification(`You voted for'${anecdote.content}`));
   };
   return (
     <div>

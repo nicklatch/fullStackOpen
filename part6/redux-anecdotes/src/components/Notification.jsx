@@ -8,7 +8,6 @@ const Notification = () => {
     borderWidth: 1,
     marginBottom: 20,
   };
-
   const notification = useSelector((state) => state.notification);
   const dispatch = useDispatch();
 
