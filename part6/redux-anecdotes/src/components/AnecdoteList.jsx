@@ -19,9 +19,9 @@ const AnecdoteList = () => {
     if (filter === 'ALL' || filter === '') {
       return anecdotes;
     } else {
-      return anecdotes.filter((anecdote) => {
-        return anecdote.content.toLowerCase().includes(filter.toLowerCase());
-      });
+      return anecdotes.filter((anecdote) =>
+        anecdote.content.toLowerCase().includes(filter.toLowerCase())
+      );
     }
   });
 
