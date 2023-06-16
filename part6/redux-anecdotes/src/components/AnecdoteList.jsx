@@ -20,7 +20,7 @@ const Anecdote = ({ anecdote }) => {
 
 const AnecdoteList = () => {
   const anecdotes = useSelector(({ anecdotes, filter }) => {
-    if (filter === 'ALL' || filter === '') {
+    if (filter === '') {
       return anecdotes;
     } else {
       return anecdotes.filter((anecdote) =>
