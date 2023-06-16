@@ -7,10 +7,9 @@ const anecdoteSlice = createSlice({
   reducers: {
     updateVote(state, action) {
       const updatedAnecdote = action.payload;
-      const unsortedAnecdotes = state.map((anecdote) =>
+      return state.map((anecdote) =>
         anecdote.id !== updatedAnecdote.id ? anecdote : updatedAnecdote
       );
-      return unsortedAnecdotes.toSorted((a, b) => b.votes - a.votes);
     },
     appendAnecdote(state, action) {
       return state.concat(action.payload);

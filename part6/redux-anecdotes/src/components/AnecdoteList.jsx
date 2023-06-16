@@ -29,9 +29,11 @@ const AnecdoteList = () => {
     }
   });
 
+  const sortedAnecdtoes = anecdotes.toSorted((a, b) => b.votes - a.votes);
+
   return (
     <>
-      {anecdotes.map((anecdote) => {
+      {sortedAnecdtoes.map((anecdote) => {
         return <Anecdote key={anecdote.id} anecdote={anecdote} />;
       })}
     </>
