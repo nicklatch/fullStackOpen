@@ -27,7 +27,6 @@ export const { updateVote, appendAnecdote, setAnecdotes } =
 export const initializeAnecdotes = () => {
   return async (dispatch) => {
     const anecdotes = await anecdoteService.getAll();
-    console.log(anecdotes);
     dispatch(setAnecdotes(anecdotes));
   };
 };

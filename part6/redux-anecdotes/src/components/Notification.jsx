@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { clearNotification } from '../reducers/notificationReducer';
+import { createNotification } from '../reducers/notificationReducer';
 
 const Notification = () => {
   const style = {
@@ -13,7 +13,7 @@ const Notification = () => {
 
   notification &&
     setTimeout(() => {
-      dispatch(clearNotification(''));
+      dispatch(createNotification(''));
     }, 5000);
 
   return notification && <div style={style}>{notification}</div>;
