@@ -2,18 +2,38 @@ import { useQuery, useQueryClient, useMutation } from 'react-query';
 import { getAnecdotes, updateAnecdoteVotes } from './requests';
 import AnecdoteForm from './components/AnecdoteForm';
 import Notification from './components/Notification';
+import { useNotificationDispatch } from './NotificationContext';
 
 const App = () => {
   const queryClient = useQueryClient();
+  const dispatch = useNotificationDispatch();
 
   const updatedAnecdoteMutation = useMutation(updateAnecdoteVotes, {
-    onSuccess: () => {
-      queryClient.invalidateQueries('anecdotes');
+    onSuccess: (updatedAnecdote) => {
+      const anecdotes = queryClient.getQueryData('anecdotes');
+      queryClient.setQueryData(
+        'anecdotes',
+        anecdotes.map((anecdote) => {
+          return anecdote.id !== updatedAnecdote.id
+            ? anecdote
+            : updatedAnecdote;
+        })
+      );
+    },
+    onError: (error) => {
+      dispatch({ type: 'SET-NOTIFICATION', payload: error.message });
     },
   });
 
   const handleVote = (anecdote) => {
     updatedAnecdoteMutation.mutate({ ...anecdote, votes: anecdote.votes + 1 });
+    dispatch({
+      type: 'SET-NOTIFICATION',
+      payload: `You voted for "${anecdote.content}"`,
+    });
+    setTimeout(() => {
+      dispatch({ type: 'CLEAR-NOTIFICATION' });
+    }, 5000);
   };
 
   const result = useQuery('anecdotes', getAnecdotes, { retry: 2 });
