@@ -1,55 +1,53 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useNotificationDispatch } from '../context/NotificationContext';
+import { useField } from '../hooks';
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState('');
-  const [author, setAuthor] = useState('');
-  const [info, setInfo] = useState('');
+  const content = useField('text');
+  const author = useField('text');
+  const info = useField('text');
   const navigate = useNavigate();
-  const dispatch = useNotificationDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     props.addNew({
-      content,
-      author,
-      info,
+      content: content.atributes.value,
+      author: author.atributes.value,
+      info: info.atributes.value,
       votes: 0,
     });
     navigate('/');
-    dispatch({ type: 'SET', payload: content });
+  };
+
+  const handleReset = () => {
+    content.resetter();
+    author.resetter();
+    info.resetter();
   };
 
   return (
     <>
       <h2>create a new anecdote</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} onReset={handleReset} id='newForm'>
         <div>
-          content
-          <input
-            name='content'
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          <label htmlFor='content'>
+            content:
+            <input {...content.atributes} name='content' />
+          </label>
         </div>
         <div>
-          author
-          <input
-            name='author'
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
+          <label htmlFor='author'>
+            author:
+            <input {...author.atributes} name='author' />
+          </label>
         </div>
         <div>
-          url for more info
-          <input
-            name='info'
-            value={info}
-            onChange={(e) => setInfo(e.target.value)}
-          />
+          <label htmlFor='info'>
+            url for more info
+            <input {...info.atributes} name='info' />
+          </label>
         </div>
-        <button>create</button>
+        <button type='submit'>create</button>
+        <button type='reset'>reset</button>
       </form>
     </>
   );

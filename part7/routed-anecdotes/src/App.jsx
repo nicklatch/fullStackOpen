@@ -11,10 +11,15 @@ import Notification from './components/Notification';
 
 const App = () => {
   const [anecdotes, setAnecdotes] = useState(mockAnecdotes);
+  const [notification, setNotification] = useState('');
 
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000);
     setAnecdotes(anecdotes.concat(anecdote));
+    setNotification(anecdote.content);
+    setTimeout(() => {
+      setNotification('');
+    }, 5000);
   };
 
   const anecdoteById = (id) => anecdotes.find((a) => a.id === id);
@@ -40,7 +45,7 @@ const App = () => {
         <Menu />
       </header>
       <main>
-        <Notification />
+        <Notification notification={notification} />
         <Routes>
           <Route
             path='/anecdotes/:id'
