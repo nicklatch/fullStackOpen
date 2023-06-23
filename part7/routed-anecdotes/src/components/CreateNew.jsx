@@ -19,9 +19,7 @@ const CreateNew = (props) => {
   };
 
   const handleReset = () => {
-    content.resetter();
-    author.resetter();
-    info.resetter();
+    [content, author, info].map((atr) => atr.resetter());
   };
 
   return (
