@@ -1,8 +1,4 @@
-import { useCountry } from '../hooks';
-
-const Country = ({ name }) => {
-  const country = useCountry(name);
-
+const Country = ({ country }) => {
   if (!country) {
     return null;
   }
@@ -10,7 +6,6 @@ const Country = ({ name }) => {
   if (!country.found) {
     return <div>not found...</div>;
   }
-
   return (
     <div>
       <h3>{country.data.name} </h3>
@@ -24,5 +19,4 @@ const Country = ({ name }) => {
     </div>
   );
 };
-
 export default Country;
