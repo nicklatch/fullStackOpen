@@ -1,5 +1,7 @@
 import { useField } from '../hooks';
-const PersonForm = () => {
+import { useResource } from '../hooks';
+
+const PersonForm = ({ personService }) => {
   const name = useField('text');
   const number = useField('text');
 

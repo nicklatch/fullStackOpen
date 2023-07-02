@@ -20,16 +20,18 @@ export const useResource = (baseUrl) => {
 
   const getAll = async (baseUrl) => {
     const response = await axios.get(baseUrl);
+    console.log(response);
     setResources(response.data);
   };
 
-  const create = async (resource, baseUrl) => {
-    const response = await axios.post(baseUrl, resource);
+  const create = async (baseUrl, newObject) => {
+    const response = await axios.post(baseUrl, newObject);
     setResources(resources.concat(response.data));
   };
 
   const service = {
     create,
+    getAll,
   };
 
   return [resources, service];
