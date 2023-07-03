@@ -2,7 +2,7 @@ import PersonForm from './PersonForm';
 import { useResource } from '../hooks';
 
 const Persons = () => {
-  const [persons, personService] = useResource('http://localhost:3005/persons');
+  const [persons, personService] = useResource('persons');
 
   return (
     <>

@@ -1,5 +1,5 @@
+import { useEffect } from 'react';
 import { useField } from '../hooks';
-import { useResource } from '../hooks';
 
 const PersonForm = ({ personService }) => {
   const name = useField('text');
@@ -9,6 +9,10 @@ const PersonForm = ({ personService }) => {
     event.preventDefault();
     personService.create({ name: name.value, number: number.value });
   };
+
+  useEffect(() => {
+    personService.getAll();
+  }, []);
 
   return (
     <form onSubmit={handlePersonSubmit}>

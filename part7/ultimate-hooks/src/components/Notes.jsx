@@ -1,8 +1,13 @@
 import NoteForm from './NoteForm';
 import { useResource } from '../hooks';
+import { useEffect } from 'react';
 
 const Notes = () => {
-  const [notes, noteService] = useResource('http://localhost:3005/notes');
+  const [notes, noteService] = useResource('notes');
+
+  useEffect(() => {
+    noteService.getAll();
+  }, []);
 
   return (
     <>

@@ -15,17 +15,17 @@ export const useField = (type) => {
   };
 };
 
-export const useResource = (baseUrl) => {
+export const useResource = (endPoint) => {
   const [resources, setResources] = useState([]);
+  const baseUrl = 'http://localhost:3005';
 
-  const getAll = async (baseUrl) => {
-    const response = await axios.get(baseUrl);
-    console.log(response);
+  const getAll = async () => {
+    const response = await axios.get(`${baseUrl}/${endPoint}`);
     setResources(response.data);
   };
 
-  const create = async (baseUrl, newObject) => {
-    const response = await axios.post(baseUrl, newObject);
+  const create = async (newObject) => {
+    const response = await axios.post(`${baseUrl}/${endPoint}`, newObject);
     setResources(resources.concat(response.data));
   };
 
