@@ -4,19 +4,27 @@ const baseUrl = 'https://studies.cs.helsinki.fi/restcountries/api/name';
 
 export const useCountry = (name) => {
   const [country, setCountry] = useState(null);
+  const [found, setFound] = useState(true);
 
   useEffect(() => {
     if (name !== '') {
       axios
         .get(`${baseUrl}/${name}`)
-        .then((response) => setCountry(response.data))
-        .catch((error) => console.log(error));
+        .then((response) => {
+          setCountry(response.data);
+          setFound(true);
+        })
+        .catch((error) => {
+          console.log(error);
+          setFound(false);
+        });
     }
   }, [name]);
 
-  console.log(country);
-
-  return country;
+  return {
+    data: country,
+    found,
+  };
 };
 
 export const useField = (type) => {
